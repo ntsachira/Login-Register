@@ -3,9 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/java/Login&amp;Register/src/com/gui/Login.java</file>
-            <file>file:/E:/java/Login&amp;Register/src/com/gui/Main.java</file>
-            <file>file:/E:/java/Login&amp;Register/src/com/gui/Register.java</file>
+            <file>file:/E:/java/Login-Register/src/com/gui/Login.java</file>
+            <file>file:/E:/java/Login-Register/src/com/gui/Main.java</file>
+            <file>file:/E:/java/Login-Register/src/com/gui/Register.java</file>
+            <file>file:/E:/java/Login-Register/src/com/database/Mysql.java</file>
         </group>
     </open-files>
 </project-private>

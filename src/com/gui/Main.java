@@ -12,8 +12,10 @@ public class Main extends javax.swing.JFrame {
     private Register register;
     
     public void setLogin(){
+        jButton1.setBackground(new Color(77,120,204));
+        jButton2.setBackground(new Color(44,44,44));
         if(login == null){
-            login = new Login();
+            login = new Login(this);
         }
         jPanel2.removeAll();
         jPanel2.add(login);
@@ -21,8 +23,10 @@ public class Main extends javax.swing.JFrame {
     }
     
     public void setRegister(){
+        jButton2.setBackground(new Color(77,120,204));
+        jButton1.setBackground(new Color(44,44,44));
         if(register == null){
-            register = new Register();                   
+            register = new Register(this);                   
         }
         jPanel2.removeAll();
         jPanel2.add(register);
@@ -117,7 +121,7 @@ public class Main extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 852, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,16 +135,14 @@ public class Main extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        jButton1.setBackground(new Color(77,120,204));
-        jButton2.setBackground(new Color(44,44,44));
+        
         
         setLogin();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        jButton2.setBackground(new Color(77,120,204));
-        jButton1.setBackground(new Color(44,44,44));
+        
         
         setRegister();
     }//GEN-LAST:event_jButton2ActionPerformed

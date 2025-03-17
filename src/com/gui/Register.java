@@ -4,17 +4,22 @@
  */
 package com.gui;
 
+import com.database.Mysql;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Dell
  */
 public class Register extends javax.swing.JPanel {
 
-    /**
-     * Creates new form Register
-     */
-    public Register() {
+    private final Main main;
+    public Register(Main main) {
         initComponents();
+        this.main = main;
     }
 
     /**
@@ -89,19 +94,29 @@ public class Register extends javax.swing.JPanel {
         jButton1.setText("Register");
         jButton1.setBorderPainted(false);
         jButton1.setPreferredSize(new java.awt.Dimension(97, 50));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(41, 41, 41));
         jButton2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
         jButton2.setText("Already Have an account? Log In");
         jButton2.setBorderPainted(false);
         jButton2.setPreferredSize(new java.awt.Dimension(97, 50));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(168, Short.MAX_VALUE)
+                .addContainerGap(249, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -119,7 +134,7 @@ public class Register extends javax.swing.JPanel {
                         .addComponent(jRadioButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(169, Short.MAX_VALUE))
+                .addContainerGap(249, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -156,6 +171,16 @@ public class Register extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        main.setLogin();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        register();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
@@ -174,4 +199,49 @@ public class Register extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
+
+    private void register() {
+        String name  = jTextField1.getText().trim();
+        String email = jTextField2.getText();
+        String password = String.valueOf(jPasswordField1.getPassword());
+        String confirmPassword = String.valueOf(jPasswordField2.getPassword());
+        String gender = jRadioButton1.isSelected()?"MALE":"FEMALE";
+        
+        if(name.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Name is required");
+        }else if(email.isBlank()){
+            JOptionPane.showMessageDialog(this, "Email is required");
+        }else if(password.isBlank()){
+            JOptionPane.showMessageDialog(this, "Password is required");
+        }else if(!password.equals(confirmPassword)){
+            JOptionPane.showMessageDialog(this, "Passwords not matching");
+        }else{
+            try {
+                //register user
+                Mysql.execute(
+                        String.format("INSERT INTO `users` (`name`,`email`,`password`,`gender`) "
+                                + "VALUES('%s','%s','%s','%s')",name,email,password,gender)
+                );
+                
+                JOptionPane.showMessageDialog(this,"Registration Success","Success",JOptionPane.INFORMATION_MESSAGE);
+                
+                //clear fields
+                resetInput();
+                
+                //switch to login
+                main.setLogin();
+                
+            } catch (SQLException ex) {
+                //handle exception
+            }
+        }
+    }
+
+    private void resetInput() {
+        jTextField1.setText("");
+        jTextField2.setText("");
+        jPasswordField1.setText("");
+        jPasswordField2.setText("");
+        jRadioButton1.setSelected(true);
+    }
 }

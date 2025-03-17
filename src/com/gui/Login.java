@@ -10,11 +10,10 @@ package com.gui;
  */
 public class Login extends javax.swing.JPanel {
 
-    /**
-     * Creates new form Login
-     */
-    public Login() {
+    private final Main main;
+    public Login(Main main) {
         initComponents();
+        this.main = main;
     }
 
     /**
@@ -74,6 +73,11 @@ public class Login extends javax.swing.JPanel {
         jButton2.setText("Do not have a account? Register");
         jButton2.setBorderPainted(false);
         jButton2.setPreferredSize(new java.awt.Dimension(0, 50));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -119,6 +123,11 @@ public class Login extends javax.swing.JPanel {
                 .addContainerGap(114, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        main.setRegister();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
